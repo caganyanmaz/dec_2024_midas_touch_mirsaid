@@ -1,4 +1,4 @@
-investor_name,investor_uuid,all_startups,total_funding_usd_over_25M,success_ratio
+investor_name,investor_uuid,all_startups,total_funding_usd_over_25M,success_rate
 Atlas Venture,6f2acf2a-5cbf-adb1-cbb4-5829ab0b08cd,6,6,100.00%
 Define Ventures,3dd1f213-972a-4340-a1e8-5c5d8e96aa13,7,6,85.71%
 Max Levchin,cd730db2-a37f-0d5b-9b34-185edafe5017,6,5,83.33%

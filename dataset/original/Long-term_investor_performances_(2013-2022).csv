@@ -1,4 +1,4 @@
-investor_name,investor_uuid,all_seed_startups,total_funding_usd_over_250M_no_ipo_no_acqusition,acquired_over_250M_raised_less_than_100M,ipo_count,success rate
+investor_name,investor_uuid,all_seed_startups,total_funding_usd_over_250M_no_ipo_no_acqusition,acquired_over_250M_raised_less_than_100M,ipo_count,success_rate
 Red Swan Ventures,725247c1-aa8e-fd36-64fb-11c368190abf,28,6,0,0,21.43%
 Techammer,b4895e54-8c20-b3af-2603-cf0a06304f0c,33,4,2,0,18.18%
 Wireframe Ventures,12571b76-23b4-0cae-871f-41b5191b8f3d,21,3,0,0,14.29%
