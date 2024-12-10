@@ -13,6 +13,7 @@ idna==3.10
 jiter==0.8.0
 kiwisolver==1.4.7
 matplotlib==3.9.3
+networkx==3.4.2
 numpy==2.1.3
 openai==1.57.0
 packaging==24.2
@@ -22,6 +23,7 @@ pydantic==2.10.3
 pydantic_core==2.27.1
 pyparsing==3.2.0
 python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
 pytz==2024.2
 six==1.17.0
 sniffio==1.3.1

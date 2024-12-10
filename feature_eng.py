@@ -23,6 +23,7 @@ filepath2 = "dataset/long_term_clean.csv"
 filepath3 = "dataset/short_term_clean.csv"
 filepath4 = "dataset/investors.csv"
 filepath5 = "dataset/startups.csv"
+filepath6 = "dataset/bucket_stats.csv"
 
 coinvestor_df = pd.read_csv(filepath1)
 longterm_df = pd.read_csv(filepath2)
@@ -30,7 +31,7 @@ shortterm_df = pd.read_csv(filepath3)
 
 investors_df = pd.read_csv(filepath4)
 startups_df = pd.read_csv(filepath5)
-
+bucketstats_df = pd.read_csv(filepath6)
 
 MEAN_PROB_SUCCESS = longterm_df['success_rate'].mean() # real-world chance of randomly investing in a startup that raises $250M+ over its lifetime, 2013-now
 MEAN_PROB_EARLY_SUCCESS = shortterm_df['success_rate'].mean() # chance of randomly investing in a 2022-now founded startup that raises $25M+
@@ -134,7 +135,7 @@ print(quintile_ranges)
 # 3           Diverse   27   34
 # 4      Universalist   35   49
 investors_df.to_csv("dataset/investors.csv", index=False)
-'''
+
 
 # grouped_rates = investors_df.groupby('focus_classification')[['percent_250m_success', 'percent_100m_success', 'percent_25m_success']].mean()
 # print(grouped_rates)
@@ -187,3 +188,76 @@ quintile_ranges = investors_df.groupby('outlier_bucket')['outlier_score'].agg(['
 # 4             L4  3.750000   6.375000
 # 5             L5  6.394558  31.666667
 investors_df.to_csv(filepath4, index=False)
+'''
+
+
+# FEATURE 5: combining both bucket types to see how many investors in each bucket and their combined outlier score
+'''
+# Filter out L0 investors
+filtered_df = investors_df[investors_df['outlier_bucket'] != 'L0']
+
+# Group by both bucket types and compute the required statistics
+combo_stats = filtered_df.groupby(['outlier_bucket', 'focus_classification']).agg(
+    count=('outlier_score', 'size'),
+    mean_outlier_score=('outlier_score', 'mean'),
+    median_outlier_score=('outlier_score', 'median'),
+    stddev_outlier_score=('outlier_score', 'std')
+).reset_index()
+
+combo_stats.to_csv("dataset/bucket_stats.csv", index=False)
+'''
+
+# FEATURE 6: add recent_grad_rate to investor table by using short_term_clean.csv table data
+'''
+# Merge the success_rate into investors_df based on investor_uuid
+investors_df = investors_df.merge(
+    shortterm_df[['investor_uuid', 'success_rate']],
+    on='investor_uuid',
+    how='left'
+)
+
+# Rename the column to 'recent_grad_rate' for naming convention
+investors_df = investors_df.rename(columns={'success_rate': 'recent_grad_rate'})
+investors_df = investors_df['recent_grad_rate'].fillna(0)
+
+investors_df.to_csv(filepath4, index=False)
+'''
+
+# FEATURE 7: add average recent_grad_rate to each of the 25 bucket classifications
+'''
+# Calculate avg_recent_grad_rate for each combination of outlier_bucket and focus_classification
+avg_grad_rate = investors_df.groupby(['outlier_bucket', 'focus_classification'])['recent_grad_rate'].mean().reset_index(name='avg_recent_grad_rate')
+
+# Merge avg_recent_grad_rate into bucketstats_df
+bucketstats_df = bucketstats_df.merge(
+    avg_grad_rate,
+    on=['outlier_bucket', 'focus_classification'],
+    how='left'
+)
+
+# Save the updated bucketstats_df to a file or preview the result
+bucketstats_df.to_csv("dataset/bucket_stats.csv", index=False)
+'''
+
+# FEATURE 8: add investing experience in years since 2013 to each investors' record in investors_df
+
+def get_first_investment_year(investor_uuid):
+    # Filter coinvestor_df for rows containing the investor_uuid
+    relevant_rows = coinvestor_df[coinvestor_df['investor_uuids'].str.contains(investor_uuid, na=False)]
+    if not relevant_rows.empty:
+        # Assuming 'founded_year' is the year column in coinvestor_df
+        return relevant_rows['founded_year'].min()  # Get the earliest year
+    else:
+        return 2024  # No investments found, assume 0 experience (shouldnt be many investors like this)
+'''
+# Apply the function to each investor_uuid in investors_df
+investors_df['first_investment_year'] = investors_df['investor_uuid'].apply(get_first_investment_year)
+
+# Calculate investing experience (years since the first investment)
+investors_df['investing_experience'] = 2024 - investors_df['first_investment_year']
+
+# Drop the helper column 'first_investment_year'
+investors_df = investors_df.drop(columns=['first_investment_year'])
+investors_df.to_csv(filepath4, index=False)
+'''
+
