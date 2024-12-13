@@ -8,6 +8,7 @@ orig_coinvestor = "dataset/original/Co-investor_relationships.csv"
 orig_longterm = "dataset/original/Long-term_investor_performances_(2013-2022).csv"
 orig_shortterm = "dataset/original/Recent_investor_performances_(2019 onwards).csv"
 
+# new filepaths for cleaned data files
 new_coinvestor = "dataset/coinvestor_clean.csv"
 new_longterm = "dataset/long_term_clean.csv"
 new_shortterm = "dataset/short_term_clean.csv"
@@ -15,14 +16,16 @@ new_shortterm = "dataset/short_term_clean.csv"
 all_investors_table = "dataset/all_investors.csv"
 startups_table = "dataset/startups.csv"
 
-# extracting the investors and creating a mapping table between uuid's and names
+# creating the dataframes
 coinvestor_df = pd.read_csv(orig_coinvestor)
 longterm_df = pd.read_csv(orig_longterm)
 shortterm_df = pd.read_csv(orig_shortterm)
 
-startupmap_df = coinvestor_df[['org_uuid', 'name']].drop_duplicates() #same thing for all startups
+# creating a mapping for startup uuid's and their names, and extracting them to a separate table
+startupmap_df = coinvestor_df[['org_uuid', 'name']].drop_duplicates() 
 startupmap_df.to_csv(startups_table, index=False) #startup map table between uuid's and names
 
+# extract all startups that do not have any category labels
 def create_startups_nocategories_df(nocategories_df, startups_df):
     # Merge the two df's on 'org_uuid'
     merged_df = nocategories_df.merge(startups_df[['org_uuid', 'name']], on='org_uuid', how='inner')
@@ -33,6 +36,7 @@ nocategories_df = coinvestor_df[coinvestor_df['category_list'].isnull()]
 startupsnocategories_df = create_startups_nocategories_df(nocategories_df, startupmap_df)
 startupsnocategories_df.to_csv("dataset/startups_nocategories.csv", index=False)
 nocategories_org_uuids = nocategories_df['org_uuid'].unique()
+# filtering out these startups from the coinvestor table
 coinvestor_df = coinvestor_df[~coinvestor_df['org_uuid'].isin(nocategories_org_uuids)]
 coinvestor_df.to_csv("dataset/coinvestor_clean.csv", index=False)
 
@@ -57,14 +61,8 @@ all_investors_df.to_csv(all_investors_table, index=False)
 
 
 # dropping the investor name column as we are now working with uuid's only (making it easier to work across data tables and one less redundant column)
-longterm_df = longterm_df.drop(columns=['investor_name'])
-longterm_df.to_csv(new_longterm, index=False)
-
 coinvestor_df = coinvestor_df.drop(columns=['investor_names'])
 coinvestor_df.to_csv(new_coinvestor, index=False)
-
-shortterm_df = shortterm_df.drop(columns=['investor_name'])
-shortterm_df.to_csv(new_shortterm, index=False)
 
 # getting rid of the startup name column in the table as I made a uuid <-> name table for mapping to and from uuid's when required
 coinvestor_df = coinvestor_df.drop(columns=['name'])

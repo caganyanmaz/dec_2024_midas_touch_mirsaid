@@ -1,8 +1,10 @@
 # Vela Partners - Investor Scoring and Feature Engineering
-### Research Internship Work
-Author: Mirsaid Abdullaev, Oxford University
 
-Supervisor: Yigit Ihlamur, Vela Partners
+## Research Internship Work
+
+### Author: Mirsaid Abdullaev, Oxford University
+
+### Supervisor: Yigit Ihlamur, Vela Partners
 
 ### Abstract
 
@@ -30,34 +32,119 @@ Analyze combinations of investor personas to determine how co-investments affect
 
 ### Plan/Methodology
 
-1. I will make a reusable, scalable data processing project with Python scripts utilising the Pandas, Numpy, OpenAI and MatPlotLib libraries to streamline the data engineering.
+1. **Create a scalable data processing project**: Build Python scripts utilizing libraries such as Pandas, NumPy, OpenAI, and Matplotlib to clean and process the data efficiently.
 
-2. My initial aim is to create a dataset preparation script which takes in datasets of the form given to me originally, and cleans the dataset to make it easier to work with.
+2. **Data preparation**: Develop a dataset preparation script to clean raw datasets, resolve inconsistencies, and standardize formats for downstream analysis.
 
-3. I will follow this with a feature engineering script where I calculate and save new datasets which have many more useful derived features from the raw data provided, for use in later parts of my project.
+3. **Feature engineering**: Create a feature engineering script to calculate investor-specific features like annualized investments, success rates, and breadth of investing. Store the results in a consolidated dataset.
 
-4. Using this feature engineering script, I will aim to categorise all investors by their success rates in investing into startups, their investing experience, their breadth of investing (i.e. how many sectors/industries they tend to invest across). I want to create two separate bucket classes initially, one which buckets investors by their success rates and the other which will bucket investors by their breadth of investing.
+4. **Investor categorization**: Categorize investors into two distinct buckets—outlier success buckets (L1-L5) and focus classification (Specialist–Universalist)—and analyze their distributions.
 
-5. The two independent bucketing strategies will then be combined to create pair-buckets, which will have certain thresholds and allow us to classify new investors into these buckets given data on them. This will also give us their expected success rate and recent graduation rate based on this. This allows us to maximise our own success rates by choosing the "follow the best picker" strategy.
+5. **Combined bucketing**: Combine the two classifications to create "pair-buckets" (e.g., L1 Specialist) and compute aggregated statistics such as success rates and recent graduation rates for these groups.
 
-6. After this, I plan on using knowledge graph methods to investigate coinvestor relationships. The first aim with this methodology will be to define an efficient way to design the knowledge graph by nodes and edges in order to capture the most important information from my now-extensive list of features. Something that I need to think about is how to weight information based on factors such as investor experience, like lowering the impact of high-success-rate/short-investor-experience compared to high-success-rate/long-investor-experience investors for example.
+6. **Knowledge graph construction**: Design a knowledge graph to represent investors as nodes with attributes and coinvestor relationships as weighted edges. Identify key attributes to include and optimize weighting schemes for relationships.
+
+7. **Graph analysis**: Apply centrality measures such as degree and eigenvector centrality to identify influential investors and partnerships.
+
+8. **Investor ranking**: Implement a custom page-rank-inspired algorithm, **InvestorRank**, to determine the most influential investors in the graph using scaled shared outlier rates as edge weights.
+
+9. **Community detection**: Use the Louvain algorithm to detect communities in the graph and analyze their aggregated statistics, focusing on the most impactful groups.
+
+10. **Final deliverables**: Save the results of community analysis and investor ranking into structured datasets, including a community composition summary and individual community files for detailed analysis.
+
+---
+
+### Development
+
+1. **Created a scalable data processing project**: Built modular Python scripts for data cleaning, feature engineering, and graph construction. These scripts can be run sequentially: `dataset_prep.py -> feature_eng.py -> knowledge_graph.py` or just run the helper script `run_analysis.py` script on its own, which will run these scripts in order.
+
+2. **Data preparation**: Cleaned raw datasets to remove inconsistencies and standardize formats. Generated cleaned datasets: `coinvestor_clean.csv`, `all_investors.csv`, `startups.csv`, `long_term_clean.csv`, and `short_term_clean.csv`.
+
+3. **Feature engineering**: Calculated investor-specific features, including annualized investments, success rates (250M+, 100M+, 25M+), breadth of investing, and outlier scores. Stored these features in `all_investors.csv`.
+
+4. **Investor categorization**: Grouped investors into:
+    - **Outlier Success Buckets**: Categorized by success rates (L1-L5).
+    - **Focus Classification**: Based on breadth of investing (Specialist–Universalist).  
+   These classifications allow for nuanced segmentation.
+
+5. **Combined bucketing**: Merged the two classifications into pair-buckets (e.g., L1 Specialist). Computed and analyzed statistics for these buckets, saved in `bucket_stats.csv`.
+
+6. **Knowledge graph construction**: Built a knowledge graph with:
+    - **Nodes**: Investors with attributes like annualized investments and outlier scores.
+    - **Edges**: Representing coinvestor relationships with attributes like shared outlier scores and total coinvestments.
+
+7. **Graph analysis**: Applied degree centrality to identify well-connected investors and eigenvector centrality to highlight those connected to influential peers. These measures provided insights into key investors and partnerships.
+
+8. **Investor ranking**: Developed **InvestorRank**, a custom ranking algorithm inspired by PageRank. This algorithm ranks investors by influence, using scaled shared outlier rates between coinvestors as edge weights.
+
+9. **Community detection**: Used the Louvain algorithm to detect and analyze communities. Summarized community statistics (e.g., average outlier rate, investor experience) in `community_composition.csv`. Saved individual community details into separate files (`community_{rank}.csv`).
+
+10. **Final deliverables**: Provided structured datasets summarizing the graph, including adjacency matrices, investor rankings, and community compositions.
+
+### Results
+
+Below are visual representations of the processed datasets and analysis results. Each image showcases key data points or insights extracted during the project.
+
+#### 1. Adjacency Matrix
+![Adjacency Matrix](results/Adjacency%20Matrix.png)  
+*Sample rows from the adjacency matrix, showing total coinvestments, shared outlier scores, and other edge attributes between investors.*
+
+#### 2. Bucket Stats
+![Bucket Stats](results/Bucket%20Stats.png)  
+*Summary statistics for investor buckets (L1-L5, Specialist–Universalist), including counts and success rates.*
+
+#### 3. Centrality Analysis
+![Centrality Analysis](results/Centrality%20Analysis.png)  
+*Output from centrality analysis, highlighting key investors based on degree and eigenvector centrality measures.*
+
+#### 4. Community 1 - Sample
+![Community 1 - Sample](results/Community%201%20-%20Sample.png)  
+*Example of a community detected using the Louvain algorithm, showing nodes (investors) and their attributes.*
+
+#### 5. Community Composition
+![Community Composition](results/Community%20Composition.png)  
+*Aggregated statistics for each detected community, including average outlier rate, experience, and node counts.*
+
+#### 6. Knowledge Graph Investors
+![Knowledge Graph Investors](results/Knowledge%20Graph%20Investors.png)  
+*Investor data used as nodes in the knowledge graph, including annualized investments, outlier scores, and classifications.*
 
 
-### Progress update on the plan/methodology action points
 
-1) I have developed a Python-based data processing framework using the Pandas, Numpy, Matplotlib libraries.S This framework is modular and reusable, allowing me to clean, process, and derive features from the provided datasets efficiently. The scripts have been developed to be able to be run sequentially, *"dataset_prep.py -> feature_eng.py -> knowledge_graph.py -> ... -> functions.py"*, where I hope the functions.py should have the final use-case functions implemented to be able to pull out data on investors provided some input data.
+---
+### Evaluation and Future Work
 
-2) A complete dataset preparation script has been implemented. This script cleans the raw datasets, removes inconsistencies such as missing values and duplicate indices, and standardizes formats across all tables. It outputs cleaned datasets ready for downstream processing. We start with a coinvestor relationships table, a long term performance, and a short term performance dataset, and my script cleans all the data, and creates a new *coinvestor_clean.csv* table, an *investors.csv* table, a *"startups.csv"* table for mapping startup uuid's to names, and new *long_term_clean.csv* and *short_term_clean.csv* tables. 
+This project achieved its primary goals of constructing a robust knowledge graph of investors and analyzing their influence within venture capital networks. However, several extensions and enhancements could be made to deepen the insights and broaden the scope of the research. 
 
-3) I have created a feature engineering script that calculates various investor-specific features such as annualized investments, success rates (250M+, 100M+, 25M+ outlier rates), recent graduation rates, breadth of investing (specialist to universalist categories), and outlier scores (my own weighted sum of the 250M+, 100M+, and 25M+ success rates in the respective weighting 0.85, 0.10, 0.05). These features are saved into the *investors.csv* dataset for analysis and modelling in tandem with the *coinvestor_clean.csv*.
+#### **Key Achievements**
+1. **Comprehensive Data Pipeline**: A well-structured data pipeline was implemented, enabling efficient data preparation, feature engineering, and graph construction. 
+2. **Custom Ranking Algorithm**: The **InvestorRank** algorithm successfully quantified investor influence by integrating shared success rates and coinvestment data.
+3. **Community Analysis**: Louvain clustering provided significant insights into the relationships and structures within the network, identifying key communities and their characteristics.
 
-4) Investors have successfully been categorized into two distinct bucket classifications:
-    - Outlier Success Buckets (*L1–L5*): Investors are grouped by success rates in their investments.
-    - Focus Classification (*Specialist–Universalist*): Investors are grouped by the breadth of industries/sectors they invest in. 
+#### **Potential Extensions**
+1. **Visual Exploration of the Graph**: While the project focused on constructing and analyzing the graph quantitatively, an intuitive visual representation would allow for identifying patterns and anomalies directly. Tools like Gephi or Plotly could be used to map the graph, highlight influential nodes, and visually depict community structures. Visual exploration could also facilitate storytelling around investor behaviors and their contributions to startup success.
 
-    Both classifications are derived from the engineered features and allow for detailed segmentation and analysis.
+2. **Feature Correlations**: The project primarily segmented investors and analyzed their influence. A natural extension would involve studying correlations between investor features (e.g., focus classification and outlier score, or annualized investments and success rates). This analysis could reveal relationships that are not immediately apparent and could inform predictive models or strategies for matching investors with startups.
 
-5) I have created combined buckets (e.g., *"L1 Specialist"*) by merging the two independent bucketing strategies. The combined buckets have been analyzed for counts, mean, median, and standard deviation of outlier scores and recent graduation rates, stored in a new *bucket_stats.csv* table. This enables predicting investor performance based on these pair classifications.
+3. **Predictive Modeling**: Given the rich dataset and constructed features, building machine learning models to predict the success probabilities of startups based on their investors’ profiles and communities could be a valuable addition. This could extend the practical applications of the research, enabling startups to identify optimal investors and vice versa.
 
-6) The foundation for a knowledge graph to analyze coinvestor relationships has been laid. Investors are represented as nodes with features like annualized investments, outlier scores, focus buckets, outlier buckets and investor experience. Edges represent coinvestor relationships with attributes such as shared investment counts, combined outlier scores, average investor experience, focus bucket pairs, and outlier bucket pairs. This design supports advanced modeling and analysis of interrelationships between investors.
+4. **Temporal Analysis**: The project largely considers static snapshots of investor performance and relationships. Incorporating temporal elements, such as how investor influence or community structures evolve over time, could provide insights into emerging trends and changing dynamics in venture capital.
 
+5. **Sector-Specific Analysis**: While the current analysis is generalized across all industries, creating sector-specific knowledge graphs could allow for a more targeted understanding of investor success and behavior in areas like fintech, healthcare, or artificial intelligence.
+
+#### **Time Constraints and Challenges**
+This project was completed independently within just four days. While the primary objectives were met, the time constraints limited further exploration into the aforementioned extensions. For instance, a detailed exploration of community interactions or fine-tuning the **InvestorRank** algorithm for specific industry contexts could have added depth to the analysis.
+
+#### **Reflection**
+This research internship with Vela Partners was an incredible learning opportunity. It gave me the chance to explore the intersection of data engineering, graph theory, and venture capital in a meaningful way. Collaborating with such a talented and insightful mentor as Yigit Ihlamur has been an inspiring experience. His guidance not only helped shape the direction of this project but also gave me a deeper appreciation for the analytical and strategic thinking required in this field. As a first-year undergraduate, this opportunity has greatly enriched my technical skills and broadened my understanding of real-world applications in venture capital.
+
+
+### **Author**: Mirsaid Abdullaev, Oxford University
+
+### **Supervisor**: Yigit Ihlamur, Vela Partners
+
+### Contact Details
+
+- **LinkedIn**: [www.linkedin.com/in/mirsaid-abdullaev-6a4ab5242/](https://www.linkedin.com/in/mirsaid-abdullaev-6a4ab5242/)
+- **Email**: [mirsaid.abdullaev@cs.ox.ac.uk](mailto:mirsaid.abdullaev@cs.ox.ac.uk)
+- **Phone**: +447 498 663301

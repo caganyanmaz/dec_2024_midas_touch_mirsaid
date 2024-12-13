@@ -1,16 +1,24 @@
-import pickle
 import numpy as np
 import pandas as pd
 import networkx as nx
 import community as community_louvain
-import matplotlib.pyplot as plt
 from collections import defaultdict
 
 kg_investors_df = pd.read_csv("dataset/kg_investors.csv")
 coinvestor_df = pd.read_csv("dataset/coinvestor_clean.csv")
-adjacency_df = pd.read_csv("dataset/adjacency_matrix.csv")
 
-'''
+# weights to sum the outlier_rates for each investor (TWEAK THIS TO PLAY WITH THE OUTLIER SCORE FOR EACH NODE IN THE GRAPH)
+WEIGHTS = {
+    "250m": 0.85,
+    "100m": 0.1,
+    "25m": 0.05
+}
+# Threshold for annualized investments to penalise coinvestor outlier rates (no scale up occurs, only scale down happens if annualised investments are below this threshold for each investor)
+ANN_INVESTMENT_THRESHOLD = 1.5  
+
+
+# STEP 1: begin by creating an adjacency matrix of all coinvestors from the coinvestor_df table
+
 # Filter valid investors from kg_investors_df
 valid_investors = set(kg_investors_df['investor_uuid'])
 
@@ -27,9 +35,7 @@ adjacency_accumulator = defaultdict(int)
 # Iterate through kg_investors_df to build the adjacency matrix
 for investor in kg_investors_df['investor_uuid']:
     # Filter rows from coinvestor_df that involve the current investor
-    investor_rows = filtered_coinvestor_df[
-        filtered_coinvestor_df['investor_uuids'].str.contains(investor, na=False)
-    ]
+    investor_rows = filtered_coinvestor_df[filtered_coinvestor_df['investor_uuids'].str.contains(investor, na=False)]
 
     # Iterate through the startups these rows represent
     for _, row in investor_rows.iterrows():
@@ -39,9 +45,9 @@ for investor in kg_investors_df['investor_uuid']:
         # Update the adjacency accumulator for all pairs involving the current investor
         for co_investor in investors_in_startup:
             if co_investor != investor and co_investor in valid_investors:
-                # Ensure pairs are always stored in a consistent order
+                # Ensure pairs are always stored in a consistent order to avoid duplicate pairs in the opposite configuration
                 pair = tuple(sorted([investor, co_investor]))
-                adjacency_accumulator[(investor, co_investor)] += 1
+                adjacency_accumulator[pair] += 1
 
 # Convert the accumulator to a DataFrame
 adjacency_data = [
@@ -49,17 +55,8 @@ adjacency_data = [
     for pair, count in adjacency_accumulator.items()
 ]
 adjacency_df = pd.DataFrame(adjacency_data)
-
 # Save the adjacency matrix as a DataFrame
 adjacency_df.to_csv("dataset/adjacency_matrix.csv", index=False)
-'''
-
-'''
-WEIGHTS = {
-    "250m": 0.85,
-    "100m": 0.1,
-    "25m": 0.05
-}
 
 
 def calculate_edge_attributes(row):
@@ -78,8 +75,7 @@ def calculate_edge_attributes(row):
     # Calculate average experience
     avg_investor_experience = (
         inv_a_data['investing_experience'].iloc[0] +
-        inv_b_data['investing_experience'].iloc[0]
-    ) / 2
+        inv_b_data['investing_experience'].iloc[0]) / 2
     
     # Get focus and outlier bucket pairs
     focus_bucket_pair = f"{inv_a_data['focus_classification'].iloc[0]},{inv_b_data['focus_classification'].iloc[0]}"
@@ -133,22 +129,15 @@ adjacency_df.to_csv("dataset/adjacency_matrix.csv", index=False)
 # Pull annualized investments from kg_investors_df
 investor_annual_investments = kg_investors_df.set_index('investor_uuid')['annualised_investments_2013'].to_dict()
 
-# Define thresholds
-ANN_INVESTMENT_THRESHOLD = 2.0  # Threshold for annualized investments
-EXPERIENCE_THRESHOLD = 10.0     # Threshold for investor experience
 
 # Define the harsher penalty scaling function
-def penalize_low_values_harsh(raw_outlier_rate, avg_ann_investments, avg_investor_experience):
+def penalize_low_values(raw_outlier_rate, avg_ann_investments):
     penalty = 1.0  # Start with no penalty
     
     # Penalize more harshly for low average annualized investments
     if avg_ann_investments < ANN_INVESTMENT_THRESHOLD:
         penalty -= 1.5 * (ANN_INVESTMENT_THRESHOLD - avg_ann_investments) / ANN_INVESTMENT_THRESHOLD
-    
-    # Penalize more harshly for low average investor experience
-    if avg_investor_experience < EXPERIENCE_THRESHOLD:
-        penalty -= 1.5 * (EXPERIENCE_THRESHOLD - avg_investor_experience) / EXPERIENCE_THRESHOLD
-    
+        
     # Apply the penalty but ensure it's not negative
     penalty = max(penalty, 0.2)  # Minimum penalty to avoid extreme reductions
     
@@ -156,7 +145,7 @@ def penalize_low_values_harsh(raw_outlier_rate, avg_ann_investments, avg_investo
     return raw_outlier_rate * penalty
 
 # Apply the penalization logic to the adjacency matrix
-def compute_penalized_outlier_rate_harsh(adjacency_row):
+def compute_penalized_outlier_rate(adjacency_row):
     raw_rate = adjacency_row['raw_outlier_rate']
     
     # Retrieve annualized investments for both investors
@@ -168,62 +157,57 @@ def compute_penalized_outlier_rate_harsh(adjacency_row):
     # Compute average annualized investments
     avg_ann_investments = (ann_invest_a + ann_invest_b) / 2
     
-    # Use precomputed avg_investor_experience
-    avg_experience = adjacency_row['avg_investor_experience']
-    
     # Apply harsher penalization
-    return penalize_low_values_harsh(raw_rate, avg_ann_investments, avg_experience)
+    return penalize_low_values(raw_rate, avg_ann_investments)
 
-# Add harsher penalized_outlier_rate column to adjacency_df
-adjacency_df['scaled_outlier_rate'] = adjacency_df.apply(compute_penalized_outlier_rate_harsh, axis=1)
+# Add harsher scaled_outlier_rate column to adjacency_df
+adjacency_df['scaled_outlier_rate'] = adjacency_df.apply(compute_penalized_outlier_rate, axis=1)
 
 adjacency_df.to_csv("dataset/adjacency_matrix.csv", index=False)
 
-'''
+
 # Initialize an undirected graph
-# G = nx.Graph()
-# # Add nodes with attributes from kg_investors_df
-# for _, row in kg_investors_df.iterrows():
-#     G.add_node(
-#         row['investor_uuid'],
-#         annualised_investments=row['annualised_investments_2013'],
-#         investing_experience=row['investing_experience'],
-#         outlier_score=row['outlier_score'],
-#         focus_classification=row['focus_classification'],
-#         outlier_bucket=row['outlier_bucket']
-#     )
+G = nx.Graph()
+# Add nodes with attributes from kg_investors_df
+for _, row in kg_investors_df.iterrows():
+    G.add_node(
+        row['investor_uuid'],
+        annualised_investments=row['annualised_investments_2013'],
+        investing_experience=row['investing_experience'],
+        outlier_score=row['outlier_score'],
+        focus_classification=row['focus_classification'],
+        outlier_bucket=row['outlier_bucket']
+    )
 
-# # Add edges with attributes
-# for _, row in adjacency_df.iterrows():
-#     inv_a = row['investor_a']
-#     inv_b = row['investor_b']
+# Add edges with attributes
+for _, row in adjacency_df.iterrows():
+    inv_a = row['investor_a']
+    inv_b = row['investor_b']
     
-#     # Add an edge with attributes
-#     G.add_edge(
-#         inv_a,
-#         inv_b,
-#         total_coinvestments=row['total_coinvestments'],
-#         avg_investor_experience=row['avg_investor_experience'],
-#         focus_bucket_pair=row['focus_bucket_pair'],
-#         outlier_bucket_pair=row['outlier_bucket_pair'],
-#         raw_outlier_rate=row['raw_outlier_rate'],
-#         scaled_outlier_rate=row['scaled_outlier_rate']
-#     )
-# for node in G.nodes():
-#     incident_edges = G.edges(node, data=True)
-#     rates = [d['scaled_outlier_rate'] for _, _, d in incident_edges if 'scaled_outlier_rate' in d]
-#     G.nodes[node]['avg_outlier_rate'] = np.mean(rates) if rates else 0
+    # Add an edge with attributes
+    G.add_edge(
+        inv_a,
+        inv_b,
+        total_coinvestments=row['total_coinvestments'],
+        avg_investor_experience=row['avg_investor_experience'],
+        focus_bucket_pair=row['focus_bucket_pair'],
+        outlier_bucket_pair=row['outlier_bucket_pair'],
+        raw_outlier_rate=row['raw_outlier_rate'],
+        scaled_outlier_rate=row['scaled_outlier_rate']
+    )
+for node in G.nodes():
+    incident_edges = G.edges(node, data=True)
+    rates = [d['scaled_outlier_rate'] for _, _, d in incident_edges if 'scaled_outlier_rate' in d]
+    G.nodes[node]['avg_outlier_rate'] = np.mean(rates) if rates else 0
 
-# # Save the graph
-# nx.write_gexf(G, "dataset/knowledge_graph.gexf")
+# Save the graph
+nx.write_gexf(G, "dataset/knowledge_graph.gexf")
 
 
-
-'''
-# Step 1.1: Degree Centrality
+# ANALYSIS 1: Degree Centrality
 degree_centrality = nx.degree_centrality(G)
 
-# Step 1.2: Eigenvector Centrality
+# ANALYSIS 2: Eigenvector Centrality
 eigenvector_centrality = nx.eigenvector_centrality(G, max_iter=1000)
 
 # Combine centrality metrics into a DataFrame for analysis
@@ -233,66 +217,43 @@ centrality_df = pd.DataFrame({
     'eigenvector_centrality': [eigenvector_centrality.get(node, 0) for node in degree_centrality.keys()]
 })
 
-# Step 1.3: Sort by centrality metrics to identify top coinvestors
-top_degree_centrality = centrality_df.sort_values(by='degree_centrality', ascending=False).head(10)
-top_eigenvector_centrality = centrality_df.sort_values(by='eigenvector_centrality', ascending=False).head(10)
-
+# Sort by centrality metrics to identify top coinvestors
+centrality_df = centrality_df.sort_values(by=['degree_centrality', 'eigenvector_centrality'], ascending=[False, False])
 # Save the results to CSV for further inspection
-centrality_df.to_csv("centrality_analysis.csv", index=False)
+centrality_df.to_csv("dataset/centrality_analysis.csv", index=False)
 
-# Print summaries
-print("Top 10 Investors by Degree Centrality:")
-print(top_degree_centrality)
-
-print("\nTop 10 Investors by Eigenvector Centrality:")
-print(top_eigenvector_centrality)
-'''
-
-'''
-# Step 2.1: Filter for successful partnerships
+# ANALYSIS 3: Filter for successful partnerships
 threshold_coinvestments = 5  # At least 5 shared startups
-threshold_scaled_outlier_rate = 10  # Shared scaled outlier rate above 50
+threshold_scaled_outlier_rate = 10  # Shared scaled outlier rate above this set threshold
 
 successful_partnerships = adjacency_df[
     (adjacency_df['total_coinvestments'] >= threshold_coinvestments) &
     (adjacency_df['scaled_outlier_rate'] >= threshold_scaled_outlier_rate)
 ]
 
-# Step 2.2: Rank partnerships by scaled_outlier_rate and total_coinvestments
+# Rank partnerships by scaled_outlier_rate and total_coinvestments
 ranked_partnerships = successful_partnerships.sort_values(
     by=['scaled_outlier_rate', 'total_coinvestments'], ascending=[False, False]
 )
 
-# Step 2.4: Summaries
+# Summaries
 print("Total partnerships analyzed:", len(adjacency_df))
 print("Number of successful partnerships:", len(successful_partnerships))
 print("Top Successful Partnerships:")
 print(ranked_partnerships)
-'''
 
-# Step 3 - InvestorRank algorithm
-'''
-MAX_COINVESTMENTS = adjacency_df['total_coinvestments'].max()
 
-# Step 3.1: Define and apply the function to compute weights
-def compute_edge_weights(graph):
-    """Add weight to edges based on scaled_outlier_rate and log-scaled total_coinvestments."""
-    for _, _, d in graph.edges(data=True):
-        log_coinvestments = np.log1p(d['total_coinvestments']) / np.log1p(MAX_COINVESTMENTS)
-        d['weight'] = d['scaled_outlier_rate'] + 10 * log_coinvestments
+# ANALYSIS 4 - InvestorRank algorithm (modified PageRank algorithm for finding the most influential investors in the graph)
 
-compute_edge_weights(G)
-
-# Step 2: Define the InvestorRank algorithm for undirected graphs
+# Define the InvestorRank algorithm for undirected graphs
 def investor_rank(graph, alpha=0.85, max_iter=100, tol=1e-6):
-    """Compute InvestorRank scores for an undirected graph."""
-    
+    # Compute InvestorRank scores for an undirected graph
     # Initialize scores equally for all nodes
     num_nodes = len(graph.nodes)
     scores = {node: 1 / num_nodes for node in graph.nodes}
 
     # Precompute the sum of weights for each node
-    weight_sums = {node: sum(data['weight'] for neighbor, data in graph[node].items()) for node in graph.nodes}
+    weight_sums = {node: sum(data['scaled_outlier_rate'] for neighbor, data in graph[node].items()) for node in graph.nodes}
 
     for iteration in range(max_iter):
         new_scores = {}
@@ -301,7 +262,7 @@ def investor_rank(graph, alpha=0.85, max_iter=100, tol=1e-6):
         for node in graph.nodes:
             # Calculate rank contributions from neighbors
             rank_sum = sum(
-                scores[neighbor] * data['weight'] / weight_sums[neighbor]
+                scores[neighbor] * data['scaled_outlier_rate'] / weight_sums[neighbor]
                 for neighbor, data in graph[node].items()
                 if weight_sums[neighbor] > 0
             )
@@ -324,29 +285,26 @@ def investor_rank(graph, alpha=0.85, max_iter=100, tol=1e-6):
 
     return scores
 
-# Step 3: Run the InvestorRank algorithm
+# Run the InvestorRank algorithm
 investor_rank_scores = investor_rank(G)
 
-# Step 4: Sort and display the top investors by rank
+# Sort and display the top investors by rank
 sorted_investors = sorted(investor_rank_scores.items(), key=lambda x: x[1], reverse=True)
 print("Top 10 Investors by InvestorRank:")
 for investor, score in sorted_investors[:50]:
     print(f"Investor: {investor}, Rank Score: {score:.6f}")
 
 scores_df = pd.DataFrame(sorted_investors, columns=['investor_uuid', 'InvestorRank_score'])
-scores_df.to_csv("investor_rank_scores.csv", index=False)
-'''
+scores_df.to_csv("dataset/investor_rank_scores.csv", index=False)
 
-# Load the graph
-# Load the graph
-G = nx.read_gexf("dataset/knowledge_graph.gexf")
 
+# ANALYSIS 5: Louvain Algorithm for Community Detection
 num_runs = 20
 results = []
 
 for run in range(num_runs):
     # Run Louvain
-    partition = community_louvain.best_partition(G, weight='weight')
+    partition = community_louvain.best_partition(G, weight='scaled_outlier_rate')
     modularity = community_louvain.modularity(partition, G)
     
     # Compute community stats
@@ -455,4 +413,3 @@ community_compositions_df = pd.DataFrame(community_compositions)
 community_compositions_df.to_csv("dataset/communities/community_composition.csv", index=False)
 
 print("Community analysis completed. Files saved.")
-
