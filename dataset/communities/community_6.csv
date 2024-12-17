@@ -1,7 +1,0 @@
-investor_uuid,annualised_investments,investing_experience,outlier_score,focus_classification,outlier_bucket
-5db50de0-f11d-a446-1656-f52bb3b2b833,4.5,11,1.5740740740740742,Universalist,L2
-c2bf0ca1-4768-fa71-330c-0963f6eadd29,0.1666666666666666,3,10.625,Specialist,L4
-236605f2-3f7f-f7df-f5cc-c251e0e80788,0.1666666666666666,4,10.625,Specialist,L4
-082723c8-f77b-4af0-a443-3748e7e56bbb,0.25,3,14.166666666666664,Balanced,L5
-dd6cb76c-8695-441f-a267-9250d96a67fa,0.5,10,14.166666666666664,Diverse,L5
-7d699500-7120-4b60-a31c-c764c8dc8f70,0.5,7,14.166666666666664,Diverse,L5
