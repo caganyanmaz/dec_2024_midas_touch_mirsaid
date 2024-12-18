@@ -13,8 +13,8 @@ def main():
     output_investor_pairs_df = pd.read_csv(OUTPUT_INVESTOR_PAIRS_FILENAME)
     output_investor_pairs_df.set_index('pair', inplace=True)
     output_investor_pairs_train_df, output_investor_pairs_test_df = train_test_split(output_investor_pairs_df, test_size=TEST_SIZE, random_state=42)
-    output_investor_pairs_train_df.to_csv(OUTPUT_INVESTOR_PAIRS_TRAIN_FILENAME, index=False)
-    output_investor_pairs_test_df.to_csv(OUTPUT_INVESTOR_PAIRS_TEST_FILENAME, index=False)
+    output_investor_pairs_train_df.to_csv(OUTPUT_INVESTOR_PAIRS_TRAIN_FILENAME)
+    output_investor_pairs_test_df.to_csv(OUTPUT_INVESTOR_PAIRS_TEST_FILENAME)
 
 
 def create_for(investment_filename, investor_filename, investor_pair_filename):
@@ -51,8 +51,8 @@ def create_investor_pair_df(investment_df, investor_df):
     coinvestor_pair_df['25m_rate' ] = coinvestor_pair_df['25m_count' ] / coinvestor_pair_df['investment_count']
     coinvestor_pair_df['100m_rate'] = coinvestor_pair_df['100m_count'] / coinvestor_pair_df['investment_count']
     coinvestor_pair_df['250m_rate'] = coinvestor_pair_df['250m_count'] / coinvestor_pair_df['investment_count']
-    coinvestor_pair_df['success_rate'] = coinvestor_pair_df['25m_rate'] * WEIGHTS['25m'] + coinvestor_pair_df['100m_rate'] * WEIGHTS['100m'] + coinvestor_pair_df['250m_rate'] * WEIGHTS['250m']
-    coinvestor_pair_df = coinvestor_pair_df[coinvestor_pair_df['success_rate'] > 0]
+    coinvestor_pair_df['weighted_success_rate'] = coinvestor_pair_df['25m_rate'] * WEIGHTS['25m'] + coinvestor_pair_df['100m_rate'] * WEIGHTS['100m'] + coinvestor_pair_df['250m_rate'] * WEIGHTS['250m']
+    coinvestor_pair_df = coinvestor_pair_df[coinvestor_pair_df['weighted_success_rate'] > 0]
     extract_features_from_investors(coinvestor_pair_df, investor_df)
     return coinvestor_pair_df
 

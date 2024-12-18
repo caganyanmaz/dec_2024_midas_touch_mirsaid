@@ -6,9 +6,6 @@ from constants import *
 
 
 
-def split_df(df, test_size=0.2, random_state=None):
-    train_df, output_investments_df = train_test_split(df, test_size=test_size, random_state=random_state)
-    return train_df, output_investments_df
 
 
 def main():

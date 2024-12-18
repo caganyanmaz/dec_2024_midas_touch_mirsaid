@@ -13,25 +13,55 @@ from sklearn.linear_model import LinearRegression
 
 def main():
     pd_set_show_full_content()
-    input_investors_df = pd.read_csv(INPUT_INVESTORS_FILENAME)
-    output_investors_train_df = pd.read_csv(OUTPUT_INVESTORS_TRAIN_FILENAME)
-    model = train(input_investors_df, output_investors_train_df, 'investor_uuid')
-    res = test(input_investors_df, output_investors_train_df, model, 'investor_uuid')
+    train_test_cycle(
+        INPUT_INVESTORS_FILENAME, 
+        OUTPUT_INVESTORS_TRAIN_FILENAME, 
+        lambda x: LinearRegression(), 
+        'investor_uuid', 
+        'models/investors-linear.pkl'
+    )
+
+    train_test_cycle(
+        INPUT_INVESTOR_PAIRS_FILENAME,
+        OUTPUT_INVESTOR_PAIRS_TRAIN_FILENAME,
+        lambda x: LinearRegression(),
+        'pair',
+        'models/coinvestors-linear.pkl'
+    )
+
+    train_test_cycle(
+        INPUT_INVESTORS_FILENAME, 
+        OUTPUT_INVESTORS_TRAIN_FILENAME, 
+        lambda x: MLPRegressor(hidden_layer_sizes=(x * x, x * x, x)), 
+        'investor_uuid', 
+        'models/investors-neural.pkl'
+    )
+
+    train_test_cycle(
+        INPUT_INVESTOR_PAIRS_FILENAME,
+        OUTPUT_INVESTOR_PAIRS_TRAIN_FILENAME,
+        lambda x: MLPRegressor(hidden_layer_sizes=(x * x, x * x, x)),
+        'pair',
+        'models/coinvestors-neural.pkl'
+    )
+
+
+def train_test_cycle(input_filename, output_filename, create_model, index, model_name):
+    input_df = pd.read_csv(input_filename)
+    output_df = pd.read_csv(output_filename)
+    model = train(input_df, output_df, index, create_model)
+    res = test(input_df, output_df, model, index)
     print(res)
-    with open('models/investors-linear.pkl','wb') as f:
+    with open(model_name, 'wb') as f:
         pickle.dump(model, f)
 
-    input_coinvestors_df = pd.read_csv(INPUT_INVESTOR_PAIRS_FILENAME)
-    output_coinvestors_train_df = pd.read_csv(OUTPUT_INVESTOR_PAIRS_TRAIN_FILENAME)
-    model = train(input_coinvestors_df, output_coinvestors_train_df, 'pair')
-
-def train(input_df, output_df, index):        
+def train(input_df, output_df, index, create_model):        
     training_data = create_training_data(input_df, output_df, index)
     no_input = training_data.shape[1] - 1
     X = training_data.iloc[:, 0:no_input]
     Y = training_data.iloc[:, no_input]
     #model = MLPRegressor(hidden_layer_sizes=(no_input * no_input, no_input * no_input, no_input), max_iter=1000)
-    model = LinearRegression()
+    model = create_model(no_input)
     print('Training model...')
     model.fit(X, Y)
     return model

@@ -28,8 +28,8 @@ def main():
     output_investors_df = pd.read_csv(OUTPUT_INVESTORS_FILENAME)
     output_investors_df.set_index('investor_uuid', inplace=True)
     output_investors_train_df, output_investors_test_df = train_test_split(output_investors_df, test_size=TEST_SIZE, random_state=42)
-    output_investors_train_df.to_csv(OUTPUT_INVESTORS_TRAIN_FILENAME, index=False)
-    output_investors_test_df.to_csv(OUTPUT_INVESTORS_TEST_FILENAME, index=False)
+    output_investors_train_df.to_csv(OUTPUT_INVESTORS_TRAIN_FILENAME)
+    output_investors_test_df.to_csv(OUTPUT_INVESTORS_TEST_FILENAME)
     
 
 def create_for(investment_filename, investor_filename):

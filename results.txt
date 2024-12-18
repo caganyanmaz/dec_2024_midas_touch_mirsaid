@@ -1,0 +1,336 @@
+Model: models/investors-linear.pkl, Method: best, Best pick count: 10
+Success rates of best investments: 30.0%, 10.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 8.565921787709497x, 13.450000000000001x, 0.0x
+Model: models/investors-linear.pkl, Method: best, Best pick count: 30
+Success rates of best investments: 23.333333333333332%, 3.3333333333333335%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 6.662383612662943x, 4.483333333333333x, 0.0x
+Model: models/investors-linear.pkl, Method: best, Best pick count: 50
+Success rates of best investments: 28.000000000000004%, 12.0%, 2.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 7.994860335195532x, 16.14x, 17.03666666666667x
+Model: models/investors-linear.pkl, Method: best, Best pick count: 100
+Success rates of best investments: 27.0%, 11.0%, 1.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 7.709329608938549x, 14.795x, 8.518333333333334x
+Model: models/investors-linear.pkl, Method: best, Best pick count: 500
+Success rates of best investments: 5.4%, 2.1999999999999997%, 0.2%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.5418659217877095x, 2.959x, 1.7036666666666669x
+Model: models/investors-linear.pkl, Method: best, Best pick count: 1000
+Success rates of best investments: 2.8000000000000003%, 1.0999999999999999%, 0.1%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.7994860335195532x, 1.4795x, 0.8518333333333334x
+Model: models/investors-linear.pkl, Method: best, Best pick count: 10000
+Success rates of best investments: 3.5077405447775813%, 0.7446600039192632%, 0.11757789535567313%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.001567705271409x, 1.0015677052714091x, 1.0015677052714091x
+Model: models/investors-linear.pkl, Method: mean, Best pick count: 10
+Success rates of best investments: 40.0%, 30.0%, 10.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 11.421229050279331x, 40.35x, 85.18333333333335x
+Model: models/investors-linear.pkl, Method: mean, Best pick count: 30
+Success rates of best investments: 13.333333333333334%, 10.0%, 3.3333333333333335%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.80707635009311x, 13.450000000000001x, 28.394444444444446x
+Model: models/investors-linear.pkl, Method: mean, Best pick count: 50
+Success rates of best investments: 8.0%, 6.0%, 2.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 2.2842458100558662x, 8.07x, 17.03666666666667x
+Model: models/investors-linear.pkl, Method: mean, Best pick count: 100
+Success rates of best investments: 4.0%, 3.0%, 1.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.1421229050279331x, 4.035x, 8.518333333333334x
+Model: models/investors-linear.pkl, Method: mean, Best pick count: 500
+Success rates of best investments: 0.8%, 0.6%, 0.2%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.2284245810055866x, 0.807x, 1.7036666666666669x
+Model: models/investors-linear.pkl, Method: mean, Best pick count: 1000
+Success rates of best investments: 3.3000000000000003%, 1.5%, 0.3%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.9422513966480448x, 2.0175x, 2.5555000000000003x
+Model: models/investors-linear.pkl, Method: mean, Best pick count: 10000
+Success rates of best investments: 3.5077405447775813%, 0.7446600039192632%, 0.11757789535567313%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.001567705271409x, 1.0015677052714091x, 1.0015677052714091x
+Model: models/investors-linear.pkl, Method: median, Best pick count: 10
+Success rates of best investments: 50.0%, 40.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 14.276536312849164x, 53.800000000000004x, 0.0x
+Model: models/investors-linear.pkl, Method: median, Best pick count: 30
+Success rates of best investments: 20.0%, 16.666666666666664%, 3.3333333333333335%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 5.710614525139666x, 22.416666666666668x, 28.394444444444446x
+Model: models/investors-linear.pkl, Method: median, Best pick count: 50
+Success rates of best investments: 12.0%, 10.0%, 2.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.426368715083799x, 13.450000000000001x, 17.03666666666667x
+Model: models/investors-linear.pkl, Method: median, Best pick count: 100
+Success rates of best investments: 6.0%, 5.0%, 1.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.7131843575418995x, 6.7250000000000005x, 8.518333333333334x
+Model: models/investors-linear.pkl, Method: median, Best pick count: 500
+Success rates of best investments: 1.2%, 1.0%, 0.2%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.3426368715083799x, 1.3450000000000002x, 1.7036666666666669x
+Model: models/investors-linear.pkl, Method: median, Best pick count: 1000
+Success rates of best investments: 3.9%, 1.5%, 0.3%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.1135698324022347x, 2.0175x, 2.5555000000000003x
+Model: models/investors-linear.pkl, Method: median, Best pick count: 10000
+Success rates of best investments: 3.5077405447775813%, 0.7446600039192632%, 0.11757789535567313%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.001567705271409x, 1.0015677052714091x, 1.0015677052714091x
+Model: models/investors-neural.pkl, Method: best, Best pick count: 10
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: best, Best pick count: 30
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: best, Best pick count: 50
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: best, Best pick count: 100
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: best, Best pick count: 500
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: best, Best pick count: 1000
+Success rates of best investments: 0.2%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.05710614525139665x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: best, Best pick count: 10000
+Success rates of best investments: 3.5077405447775813%, 0.7446600039192632%, 0.11757789535567313%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.001567705271409x, 1.0015677052714091x, 1.0015677052714091x
+Model: models/investors-neural.pkl, Method: mean, Best pick count: 10
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: mean, Best pick count: 30
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: mean, Best pick count: 50
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: mean, Best pick count: 100
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: mean, Best pick count: 500
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: mean, Best pick count: 1000
+Success rates of best investments: 0.2%, 0.2%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.05710614525139665x, 0.269x, 0.0x
+Model: models/investors-neural.pkl, Method: mean, Best pick count: 10000
+Success rates of best investments: 3.5077405447775813%, 0.7446600039192632%, 0.11757789535567313%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.001567705271409x, 1.0015677052714091x, 1.0015677052714091x
+Model: models/investors-neural.pkl, Method: median, Best pick count: 10
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: median, Best pick count: 30
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: median, Best pick count: 50
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: median, Best pick count: 100
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: median, Best pick count: 500
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/investors-neural.pkl, Method: median, Best pick count: 1000
+Success rates of best investments: 0.5%, 0.3%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.14276536312849164x, 0.4035x, 0.0x
+Model: models/investors-neural.pkl, Method: median, Best pick count: 10000
+Success rates of best investments: 3.5077405447775813%, 0.7446600039192632%, 0.11757789535567313%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.001567705271409x, 1.0015677052714091x, 1.0015677052714091x
+Model: models/coinvestors-linear.pkl, Method: best, Best pick count: 10
+Success rates of best investments: 10.0%, 10.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 2.855307262569833x, 13.450000000000001x, 0.0x
+Model: models/coinvestors-linear.pkl, Method: best, Best pick count: 30
+Success rates of best investments: 16.666666666666664%, 10.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 4.758845437616388x, 13.450000000000001x, 0.0x
+Model: models/coinvestors-linear.pkl, Method: best, Best pick count: 50
+Success rates of best investments: 10.0%, 6.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 2.855307262569833x, 8.07x, 0.0x
+Model: models/coinvestors-linear.pkl, Method: best, Best pick count: 100
+Success rates of best investments: 11.0%, 7.000000000000001%, 2.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.140837988826816x, 9.415000000000001x, 17.03666666666667x
+Model: models/coinvestors-linear.pkl, Method: best, Best pick count: 500
+Success rates of best investments: 9.0%, 2.8000000000000003%, 0.4%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 2.5697765363128493x, 3.7660000000000005x, 3.4073333333333338x
+Model: models/coinvestors-linear.pkl, Method: best, Best pick count: 1000
+Success rates of best investments: 6.941649899396378%, 1.9114688128772637%, 0.30181086519114686%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.9820543371963626x, 2.5709255533199196x, 2.5709255533199196x
+Model: models/coinvestors-linear.pkl, Method: best, Best pick count: 10000
+Success rates of best investments: 6.941649899396378%, 1.9114688128772637%, 0.30181086519114686%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.9820543371963626x, 2.5709255533199196x, 2.5709255533199196x
+Model: models/coinvestors-linear.pkl, Method: mean, Best pick count: 10
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/coinvestors-linear.pkl, Method: mean, Best pick count: 30
+Success rates of best investments: 20.0%, 16.666666666666664%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 5.710614525139666x, 22.416666666666668x, 0.0x
+Model: models/coinvestors-linear.pkl, Method: mean, Best pick count: 50
+Success rates of best investments: 12.0%, 10.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.426368715083799x, 13.450000000000001x, 0.0x
+Model: models/coinvestors-linear.pkl, Method: mean, Best pick count: 100
+Success rates of best investments: 9.0%, 5.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 2.5697765363128493x, 6.7250000000000005x, 0.0x
+Model: models/coinvestors-linear.pkl, Method: mean, Best pick count: 500
+Success rates of best investments: 9.0%, 2.8000000000000003%, 0.4%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 2.5697765363128493x, 3.7660000000000005x, 3.4073333333333338x
+Model: models/coinvestors-linear.pkl, Method: mean, Best pick count: 1000
+Success rates of best investments: 6.941649899396378%, 1.9114688128772637%, 0.30181086519114686%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.9820543371963626x, 2.5709255533199196x, 2.5709255533199196x
+Model: models/coinvestors-linear.pkl, Method: mean, Best pick count: 10000
+Success rates of best investments: 6.941649899396378%, 1.9114688128772637%, 0.30181086519114686%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.9820543371963626x, 2.5709255533199196x, 2.5709255533199196x
+Model: models/coinvestors-linear.pkl, Method: median, Best pick count: 10
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/coinvestors-linear.pkl, Method: median, Best pick count: 30
+Success rates of best investments: 13.333333333333334%, 10.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.80707635009311x, 13.450000000000001x, 0.0x
+Model: models/coinvestors-linear.pkl, Method: median, Best pick count: 50
+Success rates of best investments: 12.0%, 10.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.426368715083799x, 13.450000000000001x, 0.0x
+Model: models/coinvestors-linear.pkl, Method: median, Best pick count: 100
+Success rates of best investments: 11.0%, 5.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.140837988826816x, 6.7250000000000005x, 0.0x
+Model: models/coinvestors-linear.pkl, Method: median, Best pick count: 500
+Success rates of best investments: 8.200000000000001%, 2.8000000000000003%, 0.4%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 2.341351955307263x, 3.7660000000000005x, 3.4073333333333338x
+Model: models/coinvestors-linear.pkl, Method: median, Best pick count: 1000
+Success rates of best investments: 6.941649899396378%, 1.9114688128772637%, 0.30181086519114686%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.9820543371963626x, 2.5709255533199196x, 2.5709255533199196x
+Model: models/coinvestors-linear.pkl, Method: median, Best pick count: 10000
+Success rates of best investments: 6.941649899396378%, 1.9114688128772637%, 0.30181086519114686%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.9820543371963626x, 2.5709255533199196x, 2.5709255533199196x
+Model: models/coinvestors-neural.pkl, Method: best, Best pick count: 10
+Success rates of best investments: 20.0%, 20.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 5.710614525139666x, 26.900000000000002x, 0.0x
+Model: models/coinvestors-neural.pkl, Method: best, Best pick count: 30
+Success rates of best investments: 16.666666666666664%, 13.333333333333334%, 3.3333333333333335%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 4.758845437616388x, 17.933333333333334x, 28.394444444444446x
+Model: models/coinvestors-neural.pkl, Method: best, Best pick count: 50
+Success rates of best investments: 16.0%, 8.0%, 2.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 4.5684916201117325x, 10.760000000000002x, 17.03666666666667x
+Model: models/coinvestors-neural.pkl, Method: best, Best pick count: 100
+Success rates of best investments: 13.0%, 5.0%, 1.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.7118994413407824x, 6.7250000000000005x, 8.518333333333334x
+Model: models/coinvestors-neural.pkl, Method: best, Best pick count: 500
+Success rates of best investments: 10.4%, 3.2%, 0.6%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 2.969519553072626x, 4.304x, 5.111000000000001x
+Model: models/coinvestors-neural.pkl, Method: best, Best pick count: 1000
+Success rates of best investments: 6.941649899396378%, 1.9114688128772637%, 0.30181086519114686%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.9820543371963626x, 2.5709255533199196x, 2.5709255533199196x
+Model: models/coinvestors-neural.pkl, Method: best, Best pick count: 10000
+Success rates of best investments: 6.941649899396378%, 1.9114688128772637%, 0.30181086519114686%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.9820543371963626x, 2.5709255533199196x, 2.5709255533199196x
+Model: models/coinvestors-neural.pkl, Method: mean, Best pick count: 10
+Success rates of best investments: 0.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.0x, 0.0x, 0.0x
+Model: models/coinvestors-neural.pkl, Method: mean, Best pick count: 30
+Success rates of best investments: 3.3333333333333335%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 0.9517690875232775x, 0.0x, 0.0x
+Model: models/coinvestors-neural.pkl, Method: mean, Best pick count: 50
+Success rates of best investments: 12.0%, 6.0%, 2.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.426368715083799x, 8.07x, 17.03666666666667x
+Model: models/coinvestors-neural.pkl, Method: mean, Best pick count: 100
+Success rates of best investments: 13.0%, 7.000000000000001%, 2.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.7118994413407824x, 9.415000000000001x, 17.03666666666667x
+Model: models/coinvestors-neural.pkl, Method: mean, Best pick count: 500
+Success rates of best investments: 10.6%, 3.5999999999999996%, 0.6%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.0266256983240223x, 4.842x, 5.111000000000001x
+Model: models/coinvestors-neural.pkl, Method: mean, Best pick count: 1000
+Success rates of best investments: 6.941649899396378%, 1.9114688128772637%, 0.30181086519114686%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.9820543371963626x, 2.5709255533199196x, 2.5709255533199196x
+Model: models/coinvestors-neural.pkl, Method: mean, Best pick count: 10000
+Success rates of best investments: 6.941649899396378%, 1.9114688128772637%, 0.30181086519114686%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.9820543371963626x, 2.5709255533199196x, 2.5709255533199196x
+Model: models/coinvestors-neural.pkl, Method: median, Best pick count: 10
+Success rates of best investments: 10.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 2.855307262569833x, 0.0x, 0.0x
+Model: models/coinvestors-neural.pkl, Method: median, Best pick count: 30
+Success rates of best investments: 10.0%, 0.0%, 0.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 2.855307262569833x, 0.0x, 0.0x
+Model: models/coinvestors-neural.pkl, Method: median, Best pick count: 50
+Success rates of best investments: 10.0%, 2.0%, 2.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 2.855307262569833x, 2.6900000000000004x, 17.03666666666667x
+Model: models/coinvestors-neural.pkl, Method: median, Best pick count: 100
+Success rates of best investments: 13.0%, 6.0%, 2.0%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.7118994413407824x, 8.07x, 17.03666666666667x
+Model: models/coinvestors-neural.pkl, Method: median, Best pick count: 500
+Success rates of best investments: 11.200000000000001%, 3.5999999999999996%, 0.6%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 3.1979441340782127x, 4.842x, 5.111000000000001x
+Model: models/coinvestors-neural.pkl, Method: median, Best pick count: 1000
+Success rates of best investments: 6.941649899396378%, 1.9114688128772637%, 0.30181086519114686%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.9820543371963626x, 2.5709255533199196x, 2.5709255533199196x
+Model: models/coinvestors-neural.pkl, Method: median, Best pick count: 10000
+Success rates of best investments: 6.941649899396378%, 1.9114688128772637%, 0.30181086519114686%
+Sucess rates of all investments: 3.5022500489141066%, 0.7434944237918215%, 0.11739385638818234%
+Success rate improvement: 1.9820543371963626x, 2.5709255533199196x, 2.5709255533199196x
