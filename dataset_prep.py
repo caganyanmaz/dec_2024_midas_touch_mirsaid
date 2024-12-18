@@ -17,10 +17,10 @@ def main():
 
     original_df = original_df.drop(columns=['investor_names'])
     original_df = original_df.drop(columns=['name'])
-    training_df, test_df = split_df(original_df, 'founded_year', TRAINING_TEST_SPLIT_YEAR)
+    training_df, test_df = split_df(original_df, 'founded_year', INPUT_OUTPUT_SPLIT_YEAR)
 
-    training_df.to_csv(TRAINING_INVESTMENTS_FILENAME)
-    test_df.to_csv(TEST_INVESTMENTS_FILENAME)
+    training_df.to_csv(INPUT_INVESTMENTS_FILENAME)
+    test_df.to_csv(OUTPUT_INVESTMENTS_FILENAME)
 
 
 def create_startups_nocategories_df(nocategories_df, startups_df):
