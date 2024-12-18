@@ -3,15 +3,26 @@ import pandas as pd
 import numpy as np
 from constants import *
 from utils import *
+from sklearn.model_selection import train_test_split
             
 
 def main():
     pd_set_show_full_content()
-    input_investment_df = pd.read_csv(INPUT_INVESTMENTS_FILENAME)
-    input_investor_df  = pd.read_csv(INVESTORS_FILENAME)
+    create_for(INPUT_INVESTMENTS_FILENAME, INPUT_INVESTORS_FILENAME, INPUT_INVESTOR_PAIRS_FILENAME)
+    create_for(OUTPUT_INVESTMENTS_FILENAME, OUTPUT_INVESTORS_FILENAME, OUTPUT_INVESTOR_PAIRS_FILENAME)
+    output_investor_pairs_df = pd.read_csv(OUTPUT_INVESTOR_PAIRS_FILENAME)
+    output_investor_pairs_df.set_index('pair', inplace=True)
+    output_investor_pairs_train_df, output_investor_pairs_test_df = train_test_split(output_investor_pairs_df, test_size=TEST_SIZE, random_state=42)
+    output_investor_pairs_train_df.to_csv(OUTPUT_INVESTOR_PAIRS_TRAIN_FILENAME, index=False)
+    output_investor_pairs_test_df.to_csv(OUTPUT_INVESTOR_PAIRS_TEST_FILENAME, index=False)
+
+
+def create_for(investment_filename, investor_filename, investor_pair_filename):
+    input_investment_df = pd.read_csv(investment_filename)
+    input_investor_df  = pd.read_csv(investor_filename)
     input_investor_df.set_index('investor_uuid', inplace=True)
     investor_pair_df = create_investor_pair_df(input_investment_df, input_investor_df)
-    investor_pair_df.to_csv(INVESTOR_PAIR_FILENAME) 
+    investor_pair_df.to_csv(investor_pair_filename)
 
 
 # Features I can think of:

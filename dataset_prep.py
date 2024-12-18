@@ -3,7 +3,6 @@
 
 import pandas as pd
 from constants import *
-from sklearn.model_selection import train_test_split
 
 
 
@@ -28,9 +27,6 @@ def main():
     input_investments_df.to_csv(INPUT_INVESTMENTS_FILENAME)
     output_investments_df.to_csv(OUTPUT_INVESTMENTS_FILENAME)
 
-    output_investments_train_df, output_investments_test_df = train_test_split(output_investments_df, test_size=TEST_SIZE, random_state=42)
-    output_investments_train_df.to_csv(OUTPUT_INVESTMENTS_TRAIN_FILENAME)
-    output_investments_test_df.to_csv(OUTPUT_INVESTMENTS_TEST_FILENAME)
 
 
 def create_startups_nocategories_df(nocategories_df, startups_df):
@@ -62,7 +58,8 @@ def extract_investor_data(original_df):
         else:
             continue
     investors_df = pd.DataFrame(list(unique_pairs), columns=['investor_uuid', 'investor_name'])
-    investors_df.to_csv(INVESTORS_FILENAME, index=False)
+    investors_df.to_csv(INPUT_INVESTORS_FILENAME, index=False)
+    investors_df.to_csv(OUTPUT_INVESTORS_FILENAME, index=False)
 
 
 def split_df(df, col, val):

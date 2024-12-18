@@ -7,6 +7,7 @@
 import pandas as pd
 from utils import *
 from constants import *
+from sklearn.model_selection import train_test_split
 
 
 # Features to add:
@@ -22,12 +23,23 @@ from constants import *
 
 def main():
     pd_set_show_full_content()
-    input_investments_df = pd.read_csv(INPUT_INVESTMENTS_FILENAME)
-    input_investors_df   = pd.read_csv(INVESTORS_FILENAME)
+    create_for(INPUT_INVESTMENTS_FILENAME, INPUT_INVESTORS_FILENAME)
+    create_for(OUTPUT_INVESTMENTS_FILENAME, OUTPUT_INVESTORS_FILENAME)
+    output_investors_df = pd.read_csv(OUTPUT_INVESTORS_FILENAME)
+    output_investors_df.set_index('investor_uuid', inplace=True)
+    output_investors_train_df, output_investors_test_df = train_test_split(output_investors_df, test_size=TEST_SIZE, random_state=42)
+    output_investors_train_df.to_csv(OUTPUT_INVESTORS_TRAIN_FILENAME, index=False)
+    output_investors_test_df.to_csv(OUTPUT_INVESTORS_TEST_FILENAME, index=False)
+    
+
+def create_for(investment_filename, investor_filename):
+    input_investments_df = pd.read_csv(investment_filename)
+    input_investors_df   = pd.read_csv(investor_filename)
     input_investors_df.set_index('investor_uuid', inplace=True)
     input_investors_df = extract_data_from_investments(input_investors_df, input_investments_df)
     create_features(input_investors_df)
-    input_investors_df.to_csv(INVESTORS_FILENAME)
+    input_investors_df.to_csv(investor_filename)
+
 
 def get_best_picks(input_investor_df, output_investment_df):
     investment_value = []
