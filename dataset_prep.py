@@ -3,12 +3,17 @@
 
 import pandas as pd
 from constants import *
+from sklearn.model_selection import train_test_split
 
+
+
+def split_df(df, test_size=0.2, random_state=None):
+    train_df, output_investments_df = train_test_split(df, test_size=test_size, random_state=random_state)
+    return train_df, output_investments_df
 
 
 def main():
     original_df = pd.read_csv(ORIGINAL_FILENAME)
-
     startupmap_df = original_df[['org_uuid', 'name']].drop_duplicates() 
     startupmap_df.to_csv(STARTUPS_FILENAME, index=False) #startup map table between uuid's and names
 
@@ -17,10 +22,15 @@ def main():
 
     original_df = original_df.drop(columns=['investor_names'])
     original_df = original_df.drop(columns=['name'])
-    training_df, test_df = split_df(original_df, 'founded_year', INPUT_OUTPUT_SPLIT_YEAR)
+    input_investments_df, output_investments_df = split_df(original_df, 'founded_year', INPUT_OUTPUT_SPLIT_YEAR)
 
-    training_df.to_csv(INPUT_INVESTMENTS_FILENAME)
-    test_df.to_csv(OUTPUT_INVESTMENTS_FILENAME)
+
+    input_investments_df.to_csv(INPUT_INVESTMENTS_FILENAME)
+    output_investments_df.to_csv(OUTPUT_INVESTMENTS_FILENAME)
+
+    output_investments_train_df, output_investments_test_df = train_test_split(output_investments_df, test_size=TEST_SIZE, random_state=42)
+    output_investments_train_df.to_csv(OUTPUT_INVESTMENTS_TRAIN_FILENAME)
+    output_investments_test_df.to_csv(OUTPUT_INVESTMENTS_TEST_FILENAME)
 
 
 def create_startups_nocategories_df(nocategories_df, startups_df):
@@ -58,6 +68,8 @@ def extract_investor_data(original_df):
 def split_df(df, col, val):
     condition = df[col] <= val
     return df[condition], df[~condition]
+
+
 
 
 if __name__ == "__main__":

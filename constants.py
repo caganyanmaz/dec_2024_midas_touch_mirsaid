@@ -3,12 +3,15 @@
 ORIGINAL_FILENAME = "dataset/original.csv"
 
 # new filepaths for cleaned data files
-INPUT_INVESTMENTS_FILENAME = "dataset/training_investments.csv"
-OUTPUT_INVESTMENTS_FILENAME     = "dataset/test_investments.csv"
+INPUT_INVESTMENTS_FILENAME = "dataset/input_investments.csv"
+OUTPUT_INVESTMENTS_FILENAME     = "dataset/output_investments.csv"
+OUTPUT_INVESTMENTS_TEST_FILENAME = "dataset/output_investments_test.csv"
+OUTPUT_INVESTMENTS_TRAIN_FILENAME = "dataset/output_investments_train.csv" 
 INVESTORS_FILENAME            = "dataset/investors.csv"
 STARTUPS_FILENAME             = "dataset/startups.csv"
 NO_CATEGORY_STARTUP_FILENAME  = "dataset/startups_nocategories.csv"
 INVESTOR_PAIR_FILENAME        = "dataset/investor_pairs.csv"
+
 
 WEIGHTS = {'250m': 0.42, '100m': 0.30, '25m': 0.28} 
 #WEIGHTS = {'250m': 0.34, '100m': 0.33, '25m': 0.33} 
@@ -18,6 +21,8 @@ YEAR_THRESHOLDS = {
     '100m': 2017,
     '25m': 2019
 }
+
+TEST_SIZE = 0.5
 
 INPUT_OUTPUT_SPLIT_YEAR = 2021
 
