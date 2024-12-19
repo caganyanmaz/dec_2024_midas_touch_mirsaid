@@ -33,12 +33,14 @@ def main():
     
 
 def create_for(investment_filename, investor_filename):
-    input_investments_df = pd.read_csv(investment_filename)
-    input_investors_df   = pd.read_csv(investor_filename)
-    input_investors_df.set_index('investor_uuid', inplace=True)
-    input_investors_df = extract_data_from_investments(input_investors_df, input_investments_df)
-    create_features(input_investors_df)
-    input_investors_df.to_csv(investor_filename)
+    investments_df = pd.read_csv(investment_filename)
+    investors_df   = pd.read_csv(investor_filename)
+    investors_df.set_index('investor_uuid', inplace=True)
+    investors_df = extract_data_from_investments(investors_df, investments_df)
+    investors_df = create_features(investors_df)
+    investors_df = investors_df[investors_df['weighted_success_rate'] > 0]
+    investors_df = create_buckets(investors_df)
+    investors_df.to_csv(investor_filename)
 
 
 def get_best_picks(input_investor_df, output_investment_df):
@@ -84,6 +86,8 @@ def create_features(investors_df):
     calculate_investment_experiences(investors_df)
     calculate_investment_diversities(investors_df)
     calculate_weighted_success_rates(investors_df)
+    investors_df = investors_df.drop(columns=['25m_count', '100m_count', '250m_count'])
+    return investors_df
 
 
 def calculate_annualised_investment_counts(investors_df):
@@ -105,6 +109,9 @@ def calculate_investment_diversities(investors_df):
     normalize_column(investors_df, 'broad_diversity')
     investors_df['specific_diversity'] = (investors_df['specific_category_count'] ** 2) / investors_df['investment_count']
     normalize_column(investors_df, 'specific_diversity')
+    investors_df['proportional_broad_diversity'] = investors_df['broad_category_count'] / investors_df['investment_count']
+    investors_df['proportional_specific_diversity'] = investors_df['specific_category_count'] / investors_df['investment_count']
+    investors_df.drop(columns=['specific_category_count', 'broad_category_count'])
 
 
 def calculate_weighted_success_rates(investors_df):
@@ -153,6 +160,21 @@ def add_category_counts(investors_df, investments_df, category_column_name, new_
 def normalize_column(df, column_name):
     df[column_name] = (df[column_name] - df[column_name].min()) / (df[column_name].max() - df[column_name].min())
 
+
+def create_buckets(df):
+    # Sort by broad category rate first, then special category rate
+    df = df.sort_values(by=['broad_diversity', 'specific_diversity'], ascending=[False, False])
+    
+    # Create diversity buckets
+    df['diversity_bucket'] = pd.qcut(df['broad_diversity'], 5, labels=['Universalist', 'Diverse', 'Balanced', 'Focused', 'Specialized'])
+    
+    # Sort by weighted success rate
+    df = df.sort_values(by='weighted_success_rate', ascending=False)
+    
+    # Create success buckets
+    df['success_bucket'] = pd.cut(df['weighted_success_rate'], 5, labels=['L5', 'L4', 'L3', 'L2', 'L1'], include_lowest=True)
+
+    return df
 
 if __name__ == "__main__":
     main()

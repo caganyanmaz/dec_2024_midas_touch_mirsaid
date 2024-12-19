@@ -37,6 +37,12 @@ def is_250m(investment):
     return investment.total_funding_usd >= 250000000 and investment.founded_year >= YEAR_THRESHOLDS['250m']
 
 def calculate_list_success_rates(investments):
+    counters = {}
+    counters['25m'], counters['100m'], counters['250m'], counters['total'] = calculate_list_success_counts(investments)
+    return counters['25m'] / counters['total'], counters['100m'] / counters['total'], counters['250m'] / counters['total']
+
+
+def calculate_list_success_counts(investments):
     counters = {
         'total': 0,
         '25m': 0,
@@ -51,4 +57,5 @@ def calculate_list_success_rates(investments):
         if is_250m(investment):
             counters['250m'] += 1
         counters['total'] += 1
-    return counters['25m'] / counters['total'], counters['100m'] / counters['total'], counters['250m'] / counters['total']
+    return counters['25m'], counters['100m'], counters['250m'], counters['total']
+

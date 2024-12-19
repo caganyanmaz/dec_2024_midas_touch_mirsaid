@@ -15,11 +15,29 @@ INPUT_INVESTOR_PAIRS_FILENAME        = "dataset/input_investor_pairs.csv"
 OUTPUT_INVESTOR_PAIRS_FILENAME       = "dataset/output_investor_pairs.csv"
 OUTPUT_INVESTOR_PAIRS_TRAIN_FILENAME = "dataset/output_investor_pairs_train.csv"
 OUTPUT_INVESTOR_PAIRS_TEST_FILENAME  = "dataset/output_investor_pairs_test.csv"
+
+
+INPUT_INVESTORS_WITH_GRAPH_DATA_FILENAME = "dataset/input_investors_with_graph_data.csv"
+
+
+
 STARTUPS_FILENAME             = "dataset/startups.csv"
 NO_CATEGORY_STARTUP_FILENAME  = "dataset/startups_nocategories.csv"
 
+INVESTOR_RANK_SCORES_FILENAME = "dataset/investor_rank_scores.csv"
+CENTRALITY_ANALYSIS_FILENAME = "dataset/centrality_analysis.csv"
+COMMUNITY_DIRECTORY = "dataset/communities"
+COMMUNITY_COMPOSITION_FILENAME = f"{COMMUNITY_DIRECTORY}/community_composition.csv"
 
-WEIGHTS = {'250m': 0.42, '100m': 0.30, '25m': 0.28} 
+
+ANN_INVESTMENT_THRESHOLD = 1.5     
+
+
+CUTOFF_POINTS_FILENAME = "cutoff_points.csv"
+
+
+WEIGHTS = {'250m': 250 / 400, '100m': 100 / 400, '25m': 25 / 400}
+#WEIGHTS = {'250m': 0.42, '100m': 0.30, '25m': 0.28} 
 #WEIGHTS = {'250m': 0.34, '100m': 0.33, '25m': 0.33} 
 
 YEAR_THRESHOLDS = {

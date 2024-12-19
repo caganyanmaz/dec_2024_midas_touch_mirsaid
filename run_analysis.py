@@ -1,7 +1,7 @@
 import subprocess
 
 # List of scripts to run in sequence
-scripts = ["dataset_prep.py", "feature_eng.py", "knowledge_graph.py"]
+scripts = ["dataset_prep.py", "feature_eng.py", "co_feature_eng.py", "knowledge_graph.py", "add_graph_info_to_investors.py", "train_models.py", "test_models.py"]
 
 for script in scripts:
     try:
