@@ -5,7 +5,6 @@ from co_feature_eng import get_investor_pairs
 from scipy.sparse import coo_array
 import pickle
 
-TOP_COUNT = 5
 class simple_model():
     def __init__(self, key):
         self.key = key
@@ -76,8 +75,8 @@ def fully_test_model(model, model_name, input_file, output_file, index, find_ind
             if strat_name not in cutoff_points:
                 cutoff_points[strat_name] = {}
             cutoff_points[strat_name][best_pick_count] = cutoff_point
-        #text = f"{model_name} LSQ {best_pick_count}"
-        #test_lsq_method(model, output_investments_df, input_df, find_indices, text, best_pick_count)
+        text = f"{model_name} LSQ {best_pick_count}"
+        test_lsq_method(model, output_investments_df, input_df, find_indices, text, best_pick_count)
     return get_best_input_indices(model, input_df, 10)
 
 

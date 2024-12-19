@@ -1,3 +1,4 @@
+TOP_COUNT = 5
 
 def best(predictions):
     return max(predictions)
