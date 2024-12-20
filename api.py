@@ -18,6 +18,9 @@ input_df        = None
 method          = None
 input_data_type = ''
 
+# load_strat("investors-linear-mean")
+# get_prediction(['sdfad', ''])
+
 def load_strat(_strat_name):
     global cutoff_points, model, input_data_type, input_df, method
     strat_name = _strat_name
