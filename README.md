@@ -221,3 +221,37 @@ The other problem is due to lack of data, since the Co-investor dataset doesn't 
 [7] Oravkin, E., & Ihlamur, Y. (2021). Midas Touch: Graph-based Investor Analysis. Retrieved from https://github.com/velapartners/midastouch-v1
 
 [8] Piskorz, J., & Ihlamur, Y. (2022). Midas Touch v2: Enhanced Graph Analytics for Venture Capital. Retrieved from https://github.com/velapartners/midas_touch_v2
+
+# For API Usage
+
+In order to train the models, you have to run_analysis.py, then train_models.py and then test_models.py. You can check if anything went wrong by checking the printed results with the results in the repository (if you use the same dataset). While training the models, the INPUT_OUTPUT_SPLIT_YEAR must be set to 2021 (or some other past year) because there needs to be some output investments for the model to train on.
+
+If you want to use the model with more accurate past data, update the past data you can change the dataset/original.csv with the more accurate data, change the INPUT_OUTPUT_SPLIT_YEAR to 2025 (so that all of the data will be used as input instead of reserving some for training the model) in constants.py file and then execute run_analysis.py (make sure that it doesn't execute train_models.py and test_models.py as they'll not work as intended with no testing data).
+
+After training the models and providing the past investment data, using the API becomes simple. You just need to import the api file, load the strategy you want with `api.load_strat(strat_name)`, and then to predict any startup's success based on investors, you just have to use `api.get_prediction(investors)`, where investors are a python list of investors' uuids.
+
+To specify a strategy with strat name you have to write it in the form datatype-name-model-type-name-aggregation-method-name.
+
+Datatype names:
+    investors: Investors without graph data
+    coinvestors: Investor pair data
+    investors-with-graph-data: Investors with graph data
+
+Model type names:
+    linear
+    neural
+
+Aggragation method names:
+    best
+    mean
+    median
+    mean_top
+    median_top
+
+So an example strat name is: investors-linear-best and a python code to load it up would be 
+`api.load("investors-linear-best")`
+`(res, p) = api.prediction(investor_uuids)`
+`if res and p > 0.5:`
+`   print('Buy')`
+`else:`
+`   print('Don\'t buy')`

@@ -1,7 +1,9 @@
 import subprocess
 
 # List of scripts to run in sequence
-scripts = ["dataset_prep.py", "feature_eng.py", "co_feature_eng.py", "knowledge_graph.py", "add_graph_info_to_investors.py", "train_models.py"] #"test_models.py"]
+# train_models.py and test_models.py are commented out as they are not required for the API
+# They are only used once to create the models for research purposes, but after that, the same models can be used
+scripts = ["dataset_prep.py", "feature_eng.py", "co_feature_eng.py", "knowledge_graph.py", "add_graph_info_to_investors.py"] # "train_models.py"] "test_models.py"]
 
 for script in scripts:
     try:
