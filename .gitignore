@@ -174,4 +174,5 @@ cython_debug/
 exploration.py
 
 
-
+# Hiding the datasets
+dataset/
